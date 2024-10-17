@@ -1,1 +1,130 @@
-Caca
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storytelling - Voltaire</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('') no-repeat center center fixed; /* Lien de l'image de fond à insérer ici */
+            background-size: cover;
+            color: white;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Ajout d'un filtre assombrissant léger pour améliorer la visibilité du texte */
+        ::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3); /* Noir semi-transparent léger */
+            z-index: -10; /* S'assurer que le filtre est derrière le texte */
+        }
+        #text {
+            font-size: 1.5rem;
+            max-width: 70%;
+            opacity: 0;
+            line-height: 1.8;
+            z-index: 10; /* Texte au-dessus du filtre */
+        }
+        #continue {
+            font-size: 1rem;
+            opacity: 0;
+            position: absolute;
+            bottom: 20px;
+            z-index: 10; /* Texte au-dessus du filtre */
+            animation: fadeIn 2s forwards 10s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Masquer l'iframe YouTube */
+        #youtube-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="text">
+        <p>
+            Jean Calas, un protestant, fut accusé à tort du meurtre de son fils Marc-Antoine en 1762. Le jeune homme, en proie à des difficultés personnelles, semble s’être suicidé. Cependant, à cause des préjugés anti-protestants à Toulouse, la famille Calas fut accusée de l'avoir tué pour l'empêcher de se convertir au catholicisme. Jean Calas fut condamné à mort, malgré l'absence de preuves. </p> <p> L’affaire a choqué Voltaire, qui voyait en cela un exemple criant d’intolérance religieuse et de fanatisme.
+        </p>
+    </div>
+
+    <div id="continue">Appuyez sur la barre espace ou cliquez pour continuer</div>
+
+    <iframe id="youtube-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        // URL de la vidéo YouTube avec time code
+        const videoURL = "https://youtu.be/Hz7ihQJ2zvo?si=gcQj7lGddHZLEtBn&t=229";
+        // URL de l'image de fond
+        const backgroundImageURL = "hbackground/20240201151427000000_les_adieux_de_calas_a_sa_famille_btv1b8409599q_f1_web.jpg";
+
+        function getYouTubeEmbedURL(url) {
+            const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop().split('?')[0];
+            const timeCode = url.match(/t=(\d+)/);
+            const timeParam = timeCode ? timeCode[1] : "0";
+            return `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&start=${timeParam}`;
+        }
+
+
+        document.getElementById('youtube-player').src = getYouTubeEmbedURL(videoURL);
+        
+        document.body.style.backgroundImage = `url('${backgroundImageURL}')`;
+        
+        const youtubePlayer = document.getElementById('youtube-player');
+        function setVolume(volume) {
+            const player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': function(event) {
+                        event.target.setVolume(volume); 
+                    }
+                }
+            });
+        }
+
+        const text = document.getElementById("text");
+        setTimeout(() => {
+            text.style.animation = "fadeIn 5s forwards";
+            setVolume(50); 
+        }, 1000);
+
+        // Rediriger l'utilisateur vers une autre page
+        function redirect() {
+            window.location.href = "2.html";
+        }
+
+        // Activer la redirection sur la barre espace ou le clic
+        document.body.addEventListener("keydown", (e) => {
+            if (e.code === "Space") {
+                redirect();
+            }
+        });
+
+        document.body.addEventListener("click", () => {
+            redirect();
+        });
+    </script>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
