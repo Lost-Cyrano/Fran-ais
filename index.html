@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Préparation</title>
+    <style>
+        /* Police et icônes */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 80%;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            animation: slideIn 2s ease-out forwards;
+        }
+
+        p {
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            animation: slideIn 2.5s ease-out forwards;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1.2em;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: slideIn 3s ease-out forwards;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Style pour l'icône du casque */
+        .icon {
+            font-size: 3em;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .alert {
+            font-size: 1.2em;
+            color: red;
+            margin-top: 20px;
+            opacity: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="icon">
+            <i class="fas fa-headphones"></i>
+        </div>
+        <h1>Port d'un casque</h1>
+        <p>Ce jeu est conçu pour être jouer sur ordinateur et contient des sons d'embiance, des musics, ... Le port d'un casque augmentera drastiquement la qualité de l'expérience.</p>
+        <button onclick="redirectToMain()">Je suis prêt</button>
+        <div class="alert" id="pcAlert">Ce jeu n'est disponible que sur ordinateur.</div>
+    </div>
+
+    <script>
+        // Fonction de redirection vers la page main.html
+        function redirectToMain() {
+            window.location.href = 'main.html';
+        }
+
+        // Détection de l'appareil (affichage du message si ce n'est pas un PC)
+        function isMobile() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            return (/android|iphone|ipad|ipod|blackberry|windows phone|webos/i).test(userAgent);
+        }
+
+        // Affichage de l'alerte si l'utilisateur est sur mobile/tablette
+        document.addEventListener('DOMContentLoaded', function() {
+            if (isMobile()) {
+                const alertBox = document.getElementById('pcAlert');
+                alertBox.style.display = 'block';
+                alertBox.style.opacity = 1;
+            }
+        });
+    </script>
+
+</body>
+</html>
