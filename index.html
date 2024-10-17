@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: url('https://media2.ledevoir.com/images_galerie/nwd_1686288_1308763/image.jpg') no-repeat center center fixed;
+            background: url('') no-repeat center center fixed; /* Lien de l'image de fond à insérer ici */
             background-size: cover;
             color: white;
             font-family: 'Georgia', serif;
@@ -29,7 +29,7 @@
             right: 0;
             bottom: 0;
             background-color: rgba(0, 0, 0, 0.3); /* Noir semi-transparent léger */
-            z-index: -1; /* S'assurer que le filtre est derrière le texte */
+            z-index: -10; /* S'assurer que le filtre est derrière le texte */
         }
         #text {
             font-size: 1.5rem;
@@ -43,7 +43,7 @@
             opacity: 0;
             position: absolute;
             bottom: 20px;
-            z-index: 11; /* Texte au-dessus du filtre */
+            z-index: 10; /* Texte au-dessus du filtre */
             animation: fadeIn 2s forwards 10s;
         }
 
@@ -69,16 +69,35 @@
             connu pour ses œuvres de critique sociale, politique et religieuse. Son combat pour 
             la tolérance, la justice et contre le fanatisme religieux a marqué son œuvre, notamment 
             dans le <em>Traité sur la tolérance</em> (1763), écrit après l'affaire Calas, où il défend 
-            les droits des victimes de l'injustice.
+            les droits des victimes de l'injustice ...
         </p>
     </div>
 
     <div id="continue">Appuyez sur la barre espace ou cliquez pour continuer</div>
 
     <!-- Intégration YouTube -->
-    <iframe id="youtube-player" src="https://www.youtube.com/embed/eVLahWvHj-c?autoplay=1&loop=1&playlist=eVLahWvHj-c" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <iframe id="youtube-player" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
     <script>
+        // URL de la vidéo YouTube avec time code
+        const videoURL = "https://youtu.be/4vIQON2fDWM?si=0Bd4IpztP5EzoCiZ";
+        // URL de l'image de fond
+        const backgroundImageURL = "https://media2.ledevoir.com/images_galerie/nwd_1686288_1308763/image.jpg";
+
+        // Fonction pour construire l'URL de l'iframe
+        function getYouTubeEmbedURL(url) {
+            const videoId = url.split('v=')[1]?.split('&')[0] || url.split('/').pop().split('?')[0];
+            const timeCode = url.match(/t=(\d+)/);
+            const timeParam = timeCode ? timeCode[1] : "0"; // Obtenir le time code ou 0 si absent
+            return `https://www.youtube.com/embed/${videoId}?autoplay=1&loop=1&playlist=${videoId}&start=${timeParam}`;
+        }
+
+        // Appliquer l'URL de la vidéo
+        document.getElementById('youtube-player').src = getYouTubeEmbedURL(videoURL);
+        
+        // Appliquer l'image de fond
+        document.body.style.backgroundImage = `url('${backgroundImageURL}')`;
+
         // Fonction pour contrôler le volume
         const youtubePlayer = document.getElementById('youtube-player');
         function setVolume(volume) {
@@ -100,7 +119,7 @@
 
         // Rediriger l'utilisateur vers une autre page
         function redirect() {
-            window.location.href = "voltaire/1.html";
+            window.location.href = "prochaine_page.html";
         }
 
         // Activer la redirection sur la barre espace ou le clic
