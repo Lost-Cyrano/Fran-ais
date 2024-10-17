@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapitre 22 - De la tolérance universelle</title>
+    <style>
+        /* Styles généraux pour l'esthétique */
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e7/Vue_de_Toulouse_depuis_la_Daurade_%28octobre_2019%29.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Libre Baskerville', serif;
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75); /* Légère opacité pour voir le fond */
+        }
+
+        h1, h2 {
+            margin: 0;
+            opacity: 0;
+            animation: fadeIn 3s forwards;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation-delay: 0.5s;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 1rem;
+            animation-delay: 2s;
+        }
+
+        #start-button {
+            margin-top: 3rem;
+            padding: 10px 20px;
+            background-color: #444;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 5px;
+            opacity: 0;
+            animation: fadeIn 2s forwards 5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="overlay"></div>
+
+    <!-- Titre du Chapitre -->
+    <h1 id="chapter-title">Chapitre 22</h1>
+    <h2 id="sub-title">De la tolérance universelle</h2>
+
+    <!-- Bouton pour commencer -->
+    <button id="start-button" onclick="startGame()">Commencer</button>
+
+    <!-- Musique d'ambiance (YouTube) -->
+    <iframe id="youtube-player" src="https://youtu.be/rmvOrkgFLGg?si=UzBcY8WdkzZiQa0W" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="display: none;"></iframe>
+
+    <script>
+        // Fonction pour masquer les éléments après avoir cliqué sur commencer
+        function startGame() {
+            document.getElementById('chapter-title').style.display = 'none';
+            document.getElementById('sub-title').style.display = 'none';
+            document.getElementById('start-button').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
