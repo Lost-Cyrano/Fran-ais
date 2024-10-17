@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storytelling - Voltaire</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('https://media2.ledevoir.com/images_galerie/nwd_1686288_1308763/image.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Ajout d'un filtre assombrissant léger pour améliorer la visibilité du texte */
+        ::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3); /* Noir semi-transparent léger */
+            z-index: 1; /* S'assurer que le filtre est derrière le texte */
+        }
+        #text {
+            font-size: 1.5rem;
+            max-width: 70%;
+            opacity: 0;
+            line-height: 1.8;
+            z-index: 2; /* Texte au-dessus du filtre */
+        }
+        #continue {
+            font-size: 1rem;
+            opacity: 0;
+            position: absolute;
+            bottom: 20px;
+            z-index: 2; /* Texte au-dessus du filtre */
+            animation: fadeIn 2s forwards 10s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Masquer l'iframe YouTube */
+        #youtube-player {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="text">
+        <p>
+            Voltaire (1694-1778) est un écrivain et philosophe majeur du siècle des Lumières, 
+            connu pour ses œuvres de critique sociale, politique et religieuse. Son combat pour 
+            la tolérance, la justice et contre le fanatisme religieux a marqué son œuvre, notamment 
+            dans le <em>Traité sur la tolérance</em> (1763), écrit après l'affaire Calas, où il défend 
+            les droits des victimes de l'injustice.
+        </p>
+    </div>
+
+    <div id="continue">Appuyez sur la barre espace ou cliquez pour continuer</div>
+
+    <!-- Intégration YouTube -->
+    <iframe id="youtube-player" src="https://www.youtube.com/embed/eVLahWvHj-c?autoplay=1&loop=1&playlist=eVLahWvHj-c" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        // Fonction pour contrôler le volume
+        const youtubePlayer = document.getElementById('youtube-player');
+        function setVolume(volume) {
+            const player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': function(event) {
+                        event.target.setVolume(volume); // Définit le volume initial
+                    }
+                }
+            });
+        }
+
+        // Appliquer l'animation au texte principal et démarrer la musique en même temps
+        const text = document.getElementById("text");
+        setTimeout(() => {
+            text.style.animation = "fadeIn 5s forwards";
+            setVolume(50); // Volume à 50% (ajustez selon vos besoins)
+        }, 1000);
+
+        // Rediriger l'utilisateur vers une autre page
+        function redirect() {
+            window.location.href = "voltaire/1.html";
+        }
+
+        // Activer la redirection sur la barre espace ou le clic
+        document.body.addEventListener("keydown", (e) => {
+            if (e.code === "Space") {
+                redirect();
+            }
+        });
+
+        document.body.addEventListener("click", () => {
+            redirect();
+        });
+    </script>
+
+    <!-- Chargement de l'API YouTube pour le contrôle du volume -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>
