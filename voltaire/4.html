@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fin du Voyage</title>
+    <style>
+        /* Importer une police élégante */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: black; /* Fond noir au départ */
+            color: #f4f4f4;
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+            animation-delay: 6s; /* Synchronisé avec la musique */
+        }
+
+        .quote {
+            font-size: 2.5em;
+            max-width: 80%;
+            margin: 0 auto;
+            line-height: 1.6;
+            border: 2px solid #fff;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            animation: fadeText 4s ease-out forwards, fadeGlow 10s infinite alternate ease-in-out;
+            animation-delay: 7s; /* La citation apparaît après 7 secondes */
+        }
+
+        .author {
+            font-size: 1.5em;
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeText 3s ease-out forwards;
+            animation-delay: 11s; /* Le nom de Voltaire apparaît après la citation */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeGlow {
+            from { box-shadow: 0 0 20px rgba(255, 255, 255, 0.1); }
+            to { box-shadow: 0 0 60px rgba(255, 255, 255, 0.5); }
+        }
+
+        .background-music {
+            display: none; /* Masquer la vidéo YouTube, ne garder que la musique */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Conteneur pour la citation et l'auteur -->
+    <div class="container">
+        <div class="quote">
+            L’intolérance est le poison des nations,<br> mais voyez comme la paix et la prospérité naissent<br> du respect et de la tolérance.
+        </div>
+        <div class="author">- Voltaire</div>
+    </div>
+
+    <!-- Musique de fond via YouTube (seulement audio, vidéo masquée) -->
+    <iframe class="background-music" src="https://www.youtube.com/embed/AawLM81gIHo?start=433&autoplay=1&mute=0&loop=1&playlist=AawLM81gIHo" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    <script>
+        // Gestion de la redirection après la fin des animations
+        let animationsFinished = false;
+
+        // Délai d'attente avant d'autoriser la redirection (animation terminée après 14 secondes)
+        setTimeout(() => {
+            animationsFinished = true;
+        }, 14000); // 14 secondes (synchrone avec les animations)
+
+        // Redirection après appui sur espace ou clic si les animations sont terminées
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space' && animationsFinished) {
+                window.location.href = 'autre-page.html'; // Redirection vers une autre page
+            }
+        });
+
+        document.addEventListener('click', function() {
+            if (animationsFinished) {
+                window.location.href = 'autre-page.html'; // Redirection vers une autre page
+            }
+        });
+    </script>
+
+</body>
+</html>
